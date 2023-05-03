@@ -6,6 +6,7 @@ import java.util.List;
 public class Dom {
 
     private DomNode root;
+    private List<DomNode> flattened = null;
 
     public Dom() {
     }
@@ -19,7 +20,8 @@ public class Dom {
      * @return A list of every element in the DOM
      */
     public List<DomNode> flatten() {
-        return flatten(getRoot());
+        if(flattened == null) flattened = flatten(getRoot());
+        return flattened;
     }
 
     /**
@@ -46,7 +48,7 @@ public class Dom {
      */
     public static Dom fromString(String html) {
         try {
-            return new HtmlParser().fromString(html);
+            return HtmlParser.fromString(html);
         } catch(HtmlParseException e) {
             return null;
         }

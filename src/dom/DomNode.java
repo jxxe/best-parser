@@ -25,11 +25,11 @@ public class DomNode {
     // public void setTagName(String tagName) { this.tagName = tagName; }
 
     public DomNode getParent() { return parent; }
-    public void setParent(DomNode parent) { this.parent = parent; }
+    protected void setParent(DomNode parent) { this.parent = parent; }
 
     public List<DomNode> getChildren() { return children; }
-    public void addChild(DomNode child) { children.add(child); }
-    public void removeAllChildren() { children.clear(); }
+    protected void addChild(DomNode child) { children.add(child); }
+    protected void removeAllChildren() { children.clear(); }
     public boolean hasChildren() { return !children.isEmpty(); }
 
     @Override
