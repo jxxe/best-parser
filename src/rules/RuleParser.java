@@ -24,16 +24,18 @@ public class RuleParser {
         while(iterator.hasNext()) {
             String token = iterator.next().trim();
 
-            switch(token) {
-                case "" -> selectors.add(new DescendantSelector());
-                case ">" -> selectors.add(new DirectChildSelector());
-                case "." -> selectors.add(new ClassSelector(iterator.next()));
-                case "#" -> selectors.add(new IdSelector(iterator.next()));
-                case "~" -> selectors.add(new SiblingSelector());
-                case "+" -> selectors.add(new AdjacentSiblingSelector());
-                case "*" -> selectors.add(new WildcardSelector());
-                default -> selectors.add(new TagSelector(token));
-            }
+            selectors.add(
+                switch(token) {
+                    case "" -> new DescendantSelector();
+                    case ">" -> new ChildSelector();
+                    case "." -> new ClassSelector(iterator.next());
+                    case "#" -> new IdSelector(iterator.next());
+                    case "~" -> new SiblingSelector();
+                    case "+" -> new AdjacentSiblingSelector();
+                    case "*" -> new WildcardSelector();
+                    default -> new TagSelector(token);
+                }
+            );
         }
 
         return new Rule(selectors);
