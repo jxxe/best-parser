@@ -20,10 +20,8 @@ public class TestSelectors {
 
     @BeforeAll
     public static void createDom() {
-        var htmlParser = new HtmlParser();
-
         try {
-            dom = htmlParser.fromString("""
+            dom = HtmlParser.fromString("""
                 <html lang="en-US">
                     <body id="unique" class="parent ancestor">
                         <p class="child">Hello, world!</p>
@@ -49,7 +47,7 @@ public class TestSelectors {
     @Test public void testDirectChild() {
         var selectors = Arrays.asList(
             new ClassSelector("parent"),
-            new DirectChildSelector(),
+            new ChildSelector(),
             new ClassSelector("child")
         );
 
